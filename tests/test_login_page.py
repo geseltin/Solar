@@ -1,10 +1,9 @@
+import time
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import time
-from selenium.webdriver.support.ui import WebDriverWait
 
 
-def test_valid_login(web_driver):
+def test_valid_login(app):
     # Locators
     _login_field = "textfield-1017-inputEl"
     _password_field = "textfield-1018-inputEl"
@@ -16,23 +15,20 @@ def test_valid_login(web_driver):
     # Expected result
     _expected_title = "Система управления полномочиями сотрудников | inRights"
 
-    driver = web_driver.get_web_driver_instance()
-    wait = WebDriverWait(driver, 10)
-
     # enter login
-    login_field = wait.until(EC.presence_of_element_located((By.ID, _login_field)))
+    login_field = app.wait.until(EC.presence_of_element_located((By.ID, _login_field)))
     login_field.send_keys(_login)
     # enter password
     for i in _password:
-        driver.find_element_by_id(_password_field).send_keys(i)
+        app.driver.find_element_by_id(_password_field).send_keys(i)
         time.sleep(1)
     # click login button
-    driver.find_element_by_id(_login_button).click()
+        app.driver.find_element_by_id(_login_button).click()
 
-    wait.until(EC.presence_of_element_located((By.XPATH, _user_title)))
-    actualTitle = driver.title
+    app.wait.until(EC.presence_of_element_located((By.XPATH, _user_title)))
+    actual_title = app.driver.title
     # check title
-    assert _expected_title.lower() in actualTitle.lower()
+    assert _expected_title.lower() in actual_title.lower()
     time.sleep(3)
 
 
