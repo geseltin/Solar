@@ -1,14 +1,10 @@
 import pytest
-from fixture.webdriver import WebDriverInstance
+from fixture.webdriver import Application
 
 
-@pytest.fixture()
-def webDriverInstance():
-    fixture = WebDriverInstance()
-    return fixture
-
-
-
-
+@pytest.fixture(scope="session")
+def app():
+    application = Application(base_page_url="http://10.201.48.146:8080/inrights/app/")
+    return application
 
 
