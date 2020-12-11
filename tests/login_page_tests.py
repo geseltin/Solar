@@ -1,3 +1,4 @@
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import locators
@@ -100,13 +101,26 @@ def test_invalid_password(app):
     time.sleep(3)
 
 
-# def test_empty_fields(app):
-#     # Check if login page is presented
-#     actual_title = app.driver.title
-#     if actual_title.lower() != locators.login_page_title.lower():
-#         app.driver.find_element_by_xpath(locators.logout_button).click()
-#
-#     # Check if login button is disabled
-#     element_state = app.wait.until(EC.element_to_be_clickable((By.XPATH, locators.login_button)))
-#     assert element_state
-#     locators._
+def test_empty_fields(app):
+    # Wait for page load
+    app.wait.until(EC.title_is("Вход в систему | inRights"))
+
+    # Clearing fields
+    app.driver.find_element_by_xpath(locators.login_field).clear()
+    app.driver.find_element_by_xpath(locators.password_field).clear()
+
+    # Check if login button is disabled
+    login_button = app.driver.find_element_by_xpath(locators.login_button + '/..')
+    print(str(login_button))
+    attribute_value = login_button.get_attribute("aria-disabled")
+    print(str(attribute_value))
+
+    # Check attribute value
+    if attribute_value == "false":
+        button_state = False
+    elif attribute_value == "true":
+        button_state = True
+    else:
+        button_state = None
+
+    assert button_state

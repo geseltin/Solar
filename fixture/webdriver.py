@@ -6,7 +6,7 @@ class Application:
     def __init__(self, base_page_url):
         self.base_page_url = base_page_url
         self.driver = self.make_web_driver()
-        self.wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 15)
 
     def make_web_driver(self):
         driver = webdriver.Chrome()
