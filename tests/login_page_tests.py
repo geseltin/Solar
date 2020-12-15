@@ -1,4 +1,3 @@
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import locators
@@ -124,3 +123,5 @@ def test_empty_fields(app):
         button_state = None
 
     assert button_state
+
+    time.sleep(1)
