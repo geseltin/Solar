@@ -1,4 +1,3 @@
-import time
 
 
 def test_valid_login(app):
@@ -12,8 +11,6 @@ def test_valid_login(app):
     app.loginPage.enter_password(password)
     app.loginPage.click_login_button()
     app.loginPage.is_login_succesfull()
-
-    time.sleep(3)
 
 
 def test_invalid_login(app):
@@ -31,15 +28,11 @@ def test_invalid_login(app):
     app.loginPage.click_login_button()
     app.loginPage.is_login_error_presented()
 
-    time.sleep(3)
-
 
 def test_invalid_password(app):
     # Credentials
     login = "Administrator"
     password = "Qwe12345"
-    # Expected error message
-    expected_error_message = "Извините, пользователя с таким логином и паролем найти не удалось. Попробуйте ещё раз."
 
     app.loginPage.is_login_page_presented()
     app.loginPage.clear_login_field()
@@ -48,8 +41,6 @@ def test_invalid_password(app):
     app.loginPage.enter_password(password)
     app.loginPage.is_login_error_presented()
     app.loginPage.is_login_error_presented()
-
-    time.sleep(3)
 
 
 def test_empty_fields(app):
