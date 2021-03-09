@@ -19,7 +19,8 @@ def test_invalid_login(app):
     login = "oknysh_idm"
     password = "5ecr3t"
 
-    app.loginPage.is_login_page_presented()
+    # app.loginPage.is_login_page_presented()
+    app.mainPage.logout_from_main_page()
     app.loginPage.open_login_page()
     app.loginPage.clear_login_field()
     app.loginPage.clear_password_field()
@@ -34,12 +35,13 @@ def test_invalid_password(app):
     login = "Administrator"
     password = "Qwe12345"
 
-    app.loginPage.is_login_page_presented()
+    # app.mainPage.logout_from_main_page()
+    app.loginPage.open_login_page()
     app.loginPage.clear_login_field()
     app.loginPage.clear_password_field()
     app.loginPage.enter_login(login)
     app.loginPage.enter_password(password)
-    app.loginPage.is_login_error_presented()
+    app.loginPage.click_login_button()
     app.loginPage.is_login_error_presented()
 
 
